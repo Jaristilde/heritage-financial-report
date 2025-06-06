@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heritage Condominium Association - Financial Status Report June 2025</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #2c5aa0;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #2c5aa0;
+            margin: 0;
+            font-size: 2.2em;
+        }
+        .header h2 {
+            color: #666;
+            margin: 5px 0 0 0;
+            font-weight: normal;
+        }
+        .alert {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #856404;
+        }
+        .alert-danger {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        .alert-success {
+            background: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        .alert-critical {
+            background: #dc3545;
+            color: white;
+            border-color: #dc3545;
+            font-weight: bold;
+        }
+        .section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+        .section h3 {
+            color: #2c5aa0;
+            border-bottom: 2px solid #2c5aa0;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-size: 0.9em;
+        }
+        th, td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background: #2c5aa0;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8em;
+        }
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        tr:hover {
+            background: #e3f2fd;
+        }
+        .number {
+            text-align: right;
+            font-weight: bold;
+        }
+        .status-current {
+            background: #28a745;
+            color: white;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+        .status-owes {
+            background: #ffc107;
+            color: #212529;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+        .status-critical {
+            background: #dc3545;
+            color: white;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+        .status-deceased {
+            background: #6c757d;
+            color: white;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+        .status-attorney {
+            background: #dc3545;
+            color: white;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+        .status-paid {
+            background: #28a745;
+            color: white;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+        .financial-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .summary-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 5px solid #2c5aa0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .summary-card h4 {
+            margin: 0 0 8px 0;
+            color: #2c5aa0;
+            font-size: 0.9em;
+        }
+        .summary-card .amount {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+        }
+        .validation-needed {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .critical-unit {
+            background: #ffe6e6 !important;
+        }
+        .attorney-unit {
+            background: #fff0e0 !important;
+            font-weight: bold;
+        }
+        .good-unit {
+            background: #e6ffe6 !important;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #ddd;
+            color: #666;
+            font-size: 0.9em;
+        }
+        .confidential {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        @media print {
+            body { background: white; }
+            .container { box-shadow: none; }
+            .confidential { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="confidential">CONFIDENTIAL FINANCIAL REPORT</div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>Heritage Condominium Association</h1>
+            <h2>Complete Financial Status Report - June 2025</h2>
+            <p><strong>Based on March 2025 Data</strong> | <strong>Updated for New Management Transition</strong></p>
+            <p><em>Report Generated: June 5, 2025</em></p>
+        </div>
+
+        <div class="alert-critical">
+            <strong>CRITICAL FINANCIAL SITUATION:</strong> Total outstanding receivables exceed $150,000. Immediate collection action required on multiple fronts. Three units already with attorney.
+        </div>
+
+        <div class="section">
+            <h3>Executive Summary - The Real Financial Picture</h3>
+            <div class="financial-summary">
+                <div class="summary-card">
+                    <h4>Monthly Operating Surplus</h4>
+                    <div class="amount">$2,894</div>
+                    <small>Building is operationally profitable</small>
+                </div>
+                <div class="summary-card">
+                    <h4>Total Outstanding Receivables</h4>
+                    <div class="amount">$150,000+</div>
+                    <small>Excluding 202/203 (approved plans)</small>
+                </div>
+                <div class="summary-card">
+                    <h4>Units with Attorney</h4>
+                    <div class="amount">3 Units</div>
+                    <small>305, 308 (deceased), 405</small>
+                </div>
+                <div class="summary-card">
+                    <h4>Second Assessment Gap</h4>
+                    <div class="amount">16/24 Units</div>
+                    <small>Various amounts owed</small>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>GOOD NEWS:</strong> The building operations are profitable with $2,894/month surplus. The collection issues don't affect operational stability, but immediate legal action is essential.
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Complete Unit-by-Unit Financial Status (March 2025 Data)</h3>
+            
+            <div class="validation-needed">
+                <strong>DATA SOURCE:</strong> March 2025 management report. New management must validate against current bank statements and update for April-June 2025 activity.
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Unit</th>
+                        <th>Monthly Maint. Status</th>
+                        <th>Total Maint. Owed</th>
+                        <th>2nd Assessment Status</th>
+                        <th>1st Assessment ($208)</th>
+                        <th>Combined Total Owed</th>
+                        <th>Priority Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="good-unit">
+                        <td><strong>201</strong></td>
+                        <td><span class="status-current">UP TO DATE</span></td>
+                        <td class="number">$578.45</td>
+                        <td><span class="status-paid">PAID</span></td>
+                        <td>No $208 needed - PAID IN FULL</td>
+                        <td class="number">$578.45</td>
+                        <td>Low - Minor arrears</td>
+                    </tr>
+                    <tr class="good-unit">
+                        <td><strong>202</strong></td>
+                        <td><span class="status-current">UP TO DATE</span></td>
+                        <td class="number">$200.43</td>
+                        <td><span class="status-current">3-YEAR PLAN</span> $331.13/mo</td>
+                        <td>Verify $208 since Aug 2023</td>
+                        <td class="number">$200.43+</td>
+                        <td>LOW - Approved 3-year payment plan</td>
+                    </tr>
+                    <tr class="good-unit">
+                        <td><strong>203</strong></td>
+                        <td><span class="status-current">UP TO DATE</span></td>
+                        <td class="number">$128.81</td>
+                        <td><span class="status-current">3-YEAR PLAN</span> $331.13/mo</td>
+                        <td>Verify $208 since Aug 2023</td>
+                        <td class="number">$128.81+</td>
+                        <td>LOW - Approved 3-year payment plan</td>
+                    </tr>
+                    <tr class="critical-unit">
+                        <td><strong>204</strong></td>
+                        <td><span class="status-owes">OWES MARCH</span></td>
+                        <td class="number">$3,754.27</td>
+                        <td><span class="status-critical">OWES</span> $1,083.72</td>
+                        <td>Verify $208 since Aug 2023</td>
+                        <td class="number">$4,837.99+</td>
+                        <td><strong>HIGH - Multiple failures</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>205</strong></td>
+                        <td><span class="status-current">UP TO DATE</span></td>
+                        <td class="number">$128.75</td>
+                        <td><span class="status-paid">PAID</span></td>
+                        <td>Verify $208 since Aug 2023</td>
+                        <td class="number">$128.75+</td>
+                        <td>Low</td>
+                    </tr>
+                    <tr class="critical-unit">
+                        <td><strong>206</strong></td>
+                        <td><span class="status-owes">OWES MARCH</span></td>
+                        <td class="number">$6,560.92</td>
+                        <td><span class="status-critical">OWES</span> $1,083.72</td>
+                        <td>Verify $208 since Aug 2023</td>
+                        <td class="number">$7,644.64+</td>
+                        <td><strong>HIGH - Significant arrears</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>207</strong></td>
+                        <td><span class="status-current">UP TO DATE</span></td>
+                        <td class="number">$0.00</td>
+                        <td><span class="status-owes">OWES</span> $1,083.72</td>
+                        <td>No $208 needed - PAID IN FULL</td>
+                        <td class="number">$1,083.72</td>
+                        <td>Medium - Good unit, one issue</td>
+                    </tr>
+                    <tr>
+                        <td><strong>208</strong></td>
+                        <td><span class="status-current">UP TO DATE</span></td>
+                        <td class="number">-$537.84</td>
+                        <td><span class="status-owes">OWES</span> $1,083.72</td>
+                        <td>Verify $208 since Aug 2023</td>
+                        <td class="number">$545.88+</td>
+                        <td>Medium</td>
+                    </tr>
+                    <tr>
+                        <td><strong>301</strong></td>
+                        <td><span class="status-current">UP TO DATE</span></td>
+                        <td class="number">$4,820.79</td>
+                        <td><span class="status-paid">PAID</span></td>
+                        <td>Verify $208 since Aug 2023</td>
+                        <td class="number">$4,820.79+</td>
+                        <td>Medium - Large maintenance arrears</td>
+                    </tr>
+                    <tr class="critical-unit">
+                        <td><strong>302</strong></td>
+                        <td><span class="status-owes">OWES MARCH</span></td>
+                        <td class="number">$4,049.15</td>
+                        <td><span class="status-critical">VERIFY CLOSING</span> $11,920.92</td>
+                        <td>No $208 needed - PAID IN FULL</td>
+                        <td class="number">$4,049.15 - $15,970.07</td>
+                        <td><strong>CRITICAL - Must verify closing payment + current maintenance</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>303</strong></td>
+                        <td><span class="status-current">UP TO DATE</span></td>
+                        <td class="number">$7,875.24</td>
+                        <td><span class="status-owes">OWES</span> $1,083.72</td>
+                        <td>Verify $208 since Aug 2023</td>
+                        <td class="number">$8,958.96+</td>
+                        <td><strong>HIGH - Large total owed</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>304</strong></td>
+                        <td><span class="status-current">UP TO DATE</span></td>
+                        <td class="number">-$130.85</td>
+                        <td><span class="status-owes">OWES</span> $1,083.72</td>
+                        <td>No $208 needed - PAID IN FULL</td>
+                        <td class="number">$952.87</td>
+                        <td>Medium</td>
+                    </tr>
+                    <tr class="attorney-unit">
+                        <td><strong>305</strong></td>
+                        <td><span class="status-current">UP TO DATE</span></td>
+                        <td class="number">$20,247.06</td>
+                        <td><span class="status-attorney">ATTORNEY</span> $1,083.72</td>
+                        <td>Verify $208 since Aug 2023</td>
+                        <td class="number">$21,330.78+</td>
+                        <td><strong>ATTORNEY - Major case</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>306</strong></td>
+                        <td><span class="status-current">UP TO DATE</span></td>
+                        <td class="number">$1,735.35</td>
+                        <td><span class="status-owes">OWES</span> $1,083.72</td>
+                        <td>No $208 needed - PAID IN FULL</td>
+                        <td class="number">$2,819.07</td>
+                        <td>Medium</td>
+                    </tr>
+                    <tr class="good-unit">
+                        <td><strong>307</strong></td>
+                        <td><span class="status-current">UP TO DATE</span></td>
+                        <td class="number">$7.68</td>
+                        <td><span class="status-paid">PAID</span></td>
+                        <td>No $208 needed - PAID IN FULL</td>
+                        <td class="number">$7.68</td>
+                        <td>Low - Excellent unit</td>
+                    </tr>
+                    <tr class="attorney-unit">
+                        <td><strong>308</strong></td>
+                        <td><span class="status-current">UP TO DATE</span></td>
+                        <td class="number">$38,690.10</td>
+                        <td><span class="status-deceased">ESTATE</span> $1,083.72</td>
+                        <td>Verify $208 since Aug 2023</td>
+                        <td class="number">$39,773.82+</td>
+                        <td><strong>ATTORNEY - Deceased owner</strong></td>
+                    </tr>
+                    <tr class="critical-unit">
+                        <td><strong>401</strong></td>
+                        <td><span class="status-owes">OWES MARCH</span></td>
+                        <td class="number">$4,216.31</td>
+                        <td><span class="status-paid">PAID</span></td>
+                        <td>Verify $208 since Aug 2023</td>
+                        <td class="number">$4,216.31+</td>
+                        <td>Medium - Behind on maintenance</td>
+                    </tr>
+                    <tr>
+                        <td><strong>402</strong></td>
+                        <td><span class="status-current">UP TO DATE</span></td>
+                        <td class="number">$1,281.40</td>
+                        <td><span class="status-owes">OWES</span> $1,083.72</td>
+                        <td>Verify $208 since Aug 2023</td>
+                        <td class="number">$2,365.12+</td>
+                        <td>Medium - In collection</td>
+                    </tr>
+                    <tr class="good-unit">
+                        <td><strong>403</strong></td>
+                        <td><span class="status-current">UP TO DATE</span></td>
+                        <td class="number">-$50.00</td>
+                        <td><span class="status-owes">OWES</span> $251.16</td>
+                        <td>No $208 needed - PAID IN FULL</td>
+                        <td class="number">$201.16</td>
+                        <td>Low - Nearly current</td>
+                    </tr>
+                    <tr>
+                        <td><strong>404</strong></td>
+                        <td><span class="status-current">UP TO DATE</span></td>
+                        <td class="number">-$1,060.41</td>
+                        <td><span class="status-owes">OWES</span> $1,083.72</td>
+                        <td>No $208 needed - PAID IN FULL</td>
+                        <td class="number">$23.31</td>
+                        <td>Low - Nearly current</td>
+                    </tr>
+                    <tr class="attorney-unit">
+                        <td><strong>405</strong></td>
+                        <td><span class="status-owes">OWES MARCH</span></td>
+                        <td class="number">$20,978.75</td>
+                        <td><span class="status-attorney">ATTORNEY</span> $1,083.72</td>
+                        <td>Verify $208 since Aug 2023</td>
+                        <td class="number">$22,062.47+</td>
+                        <td><strong>ATTORNEY - Major case</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>406</strong></td>
+                        <td><span class="status-current">UP TO DATE</span></td>
+                        <td class="number">$266.64</td>
+                        <td><span class="status-paid">PAID</span></td>
+                        <td>No $208 needed - PAID IN FULL</td>
+                        <td class="number">$266.64</td>
+                        <td>Low</td>
+                    </tr>
+                    <tr class="good-unit">
+                        <td><strong>407</strong></td>
+                        <td><span class="status-current">UP TO DATE</span></td>
+                        <td class="number">-$58.32</td>
+                        <td><span class="status-paid">PAID</span></td>
+                        <td>No $208 needed - PAID IN FULL</td>
+                        <td class="number">-$58.32</td>
+                        <td>Excellent - Credit balance</td>
+                    </tr>
+                    <tr>
+                        <td><strong>408</strong></td>
+                        <td><span class="status-owes">OWES MARCH</span></td>
+                        <td class="number">$3,541.79</td>
+                        <td><span class="status-paid">PAID</span></td>
+                        <td>No $208 needed - PAID IN FULL</td>
+                        <td class="number">$3,541.79</td>
+                        <td>Medium - Behind on maintenance only</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h3>Collection Priority Analysis</h3>
+            
+            <h4>🔴 CRITICAL PRIORITY (1 Unit) - Documentation Required</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Unit</th>
+                        <th>Potential Owed</th>
+                        <th>Documentation Required</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="critical-unit">
+                        <td>302</td>
+                        <td class="number">$4,049 - $15,970</td>
+                        <td>Proof of $11,920.92 payment at closing + current maintenance proof</td>
+                        <td>Request closing documents within 10 days</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>🔴 ATTORNEY LEVEL (3 Units) - $83,167+ Total</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Unit</th>
+                        <th>Total Owed</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="attorney-unit">
+                        <td>305</td>
+                        <td class="number">$21,330.78+</td>
+                        <td>With Attorney Daniel</td>
+                        <td>Continue legal proceedings</td>
+                    </tr>
+                    <tr class="attorney-unit">
+                        <td>308</td>
+                        <td class="number">$39,773.82+</td>
+                        <td>Deceased owner - Estate</td>
+                        <td>Probate/Estate collection</td>
+                    </tr>
+                    <tr class="attorney-unit">
+                        <td>405</td>
+                        <td class="number">$22,062.47+</td>
+                        <td>With Attorney Daniel</td>
+                        <td>Continue legal proceedings</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>🟠 HIGH PRIORITY (4 Units) - $26,000+ Total</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Unit</th>
+                        <th>Total Owed</th>
+                        <th>Issues</th>
+                        <th>Immediate Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>204</td>
+                        <td class="number">$4,837.99+</td>
+                        <td>Owes March + 2nd Assessment</td>
+                        <td>Demand letter, lien filing</td>
+                    </tr>
+                    <tr>
+                        <td>206</td>
+                        <td class="number">$7,644.64+</td>
+                        <td>Owes March + 2nd Assessment</td>
+                        <td>Demand letter, lien filing</td>
+                    </tr>
+                    <tr>
+                        <td>303</td>
+                        <td class="number">$8,958.96+</td>
+                        <td>Large maintenance arrears</td>
+                        <td>Payment plan or legal action</td>
+                    </tr>
+                    <tr>
+                        <td>401</td>
+                        <td class="number">$4,216.31+</td>
+                        <td>Behind on maintenance</td>
+                        <td>Payment arrangement</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>🟡 MEDIUM PRIORITY (Including Unit 408)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Unit</th>
+                        <th>Total Owed</th>
+                        <th>Issues</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>408</td>
+                        <td class="number">$3,541.79</td>
+                        <td>Behind on maintenance only (2nd assessment PAID)</td>
+                        <td>Payment arrangement for maintenance arrears</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><em>Other medium priority units with standard issues...</em></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>🟢 LOW PRIORITY (Protected & Minor Issues)</h4>
+            <p>Units 202 & 203 on approved payment plans, plus units with minor arrears or excellent payment history.</p>
+        </div>
+
+        <div class="section">
+            <h3>Assessment Revenue Analysis</h3>
+            
+            <h4>First Special Assessment ($208/month) Status:</h4>
+            <div class="financial-summary">
+                <div class="summary-card">
+                    <h4>Units Paid in Full</h4>
+                    <div class="amount">11 Units</div>
+                    <small>No longer owe $208/month</small>
+                </div>
+                <div class="summary-card">
+                    <h4>Estimated Current Collections</h4>
+                    <div class="amount">$1,872/month</div>
+                    <small>9 units × $208 (estimated)</small>
+                </div>
+                <div class="summary-card">
+                    <h4>Loan Payment Gap</h4>
+                    <div class="amount">$884/month</div>
+                    <small>Covered by operating surplus</small>
+                </div>
+            </div>
+
+            <h4>Second Special Assessment ($1,083.72/month) Status:</h4>
+            <div class="financial-summary">
+                <div class="summary-card">
+                    <h4>Units Paid in Full</h4>
+                    <div class="amount">8 Units</div>
+                    <small>201, 205, 301, 307, 401, 406, 407, 408</small>
+                </div>
+                <div class="summary-card">
+                    <h4>Units Still Owing</h4>
+                    <div class="amount">16 Units</div>
+                    <small>Various amounts owed</small>
+                </div>
+                <div class="summary-card">
+                    <h4>Total Outstanding</h4>
+                    <div class="amount">$17,174</div>
+                    <small>Second assessment only</small>
+                </div>
+            </div>
+
+            <h4>Units Fully Paid (Second Special Assessment):</h4>
+            <ul>
+                <li>Unit 201</li>
+                <li>Unit 205</li>
+                <li>Unit 301</li>
+                <li>Unit 307</li>
+                <li>Unit 401</li>
+                <li>Unit 406</li>
+                <li>Unit 407</li>
+                <li>Unit 408</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>SPECIAL NOTES - Payment Arrangements & Documentation Required</h3>
+            
+            <div class="alert">
+                <h4
